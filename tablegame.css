@@ -1,0 +1,11 @@
+#Sprite{
+	position: absolute;
+	display : block;
+	margin-left : 47vw;
+	margin-top: 48vh;
+}
+
+#background {
+  background-position : 0 0;
+  transition-duration : 1s
+}
