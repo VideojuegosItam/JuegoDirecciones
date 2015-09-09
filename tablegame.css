@@ -1,11 +1,17 @@
 #Sprite{
+	background: transparent url(RubySprite.png) 0 0 no-repeat;
 	position: absolute;
 	display : block;
-	margin-left : 47vw;
-	margin-top: 48vh;
+	left : 48vw;
+	top: 54vh;
+	width: 32px;
+	height: 41px;
+	z-index: 2000;
+	cursor: pointer;
 }
 
 #background {
+  background: #aedfe5 url(grid.jpg) 0 0 repeat;
   background-position : 0 0;
   transition-duration : 1s
 }
