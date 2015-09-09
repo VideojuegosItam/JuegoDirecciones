@@ -1,20 +1,7 @@
 
-console.log("Hi");
+console.log("Hi"); //Inicio, solo debug
 
-// $('#Sprite')
-					// .sprite({fps: 9, no_of_frames: 3})
-					// .spRandom({top: 50, bottom: 200, left: 300, right: 320})
-					// .isDraggable()
-					// .activeOnClick()
-					// .active();
-
-					
-// $('#Sprite')
-	// .sprite({fps: 12, no_of_frames: 3})
-	// .isDraggable()
-	// .activeOnCLick()
-	// .active();
-
+//Variables a usar
 var queue= [];
 
 var badPlaces = [];
@@ -29,8 +16,11 @@ var globalState;
 
 var queue= [];
 
+//Determinar coordenadas de victoria
 //var win = {x:y};
 
+
+	//todas las funciones de animacion!
 	(function($) {
 		$(document).ready(function() {
 				$('#Sprite')
@@ -71,24 +61,26 @@ var queue= [];
 
 		})(jQuery);
 
-
+//Llenar el Queue
 function addQueue(direction){
 	queue.push(direction);
 	console.log(queue);
 }
 
+//Borrar ultimo elemento del queue
 function bBack(){
 	queue.pop();
 	console.log(queue);
 }
 
+//mover el background
 function moveamount(x, y){
   position.x = position.x + x
   position.y = position.y + y
 $('#background').css('background-position',position.x + 'px '+position.y+'px');
 }
 
-//ticker
+//ticker. Loop cada 800ms.
  function pressStart(){
 	globalState = setInterval(function(){
 	if (queue.length !==0){
@@ -117,6 +109,7 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 } 
 	}
 	else {
+	//Se acabo del stack.
 		//win!
 		actions.stop();
 		console.log("Stack empty");
