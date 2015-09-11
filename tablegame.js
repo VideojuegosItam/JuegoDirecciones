@@ -4,7 +4,7 @@ console.log("Hi"); //Inicio, solo debug
 //Variables a usar
 var queue= [];
 
-var badPlaces = [];
+var badPlaces = [{x: 64.3, y: 128.6, width: 3, height: 4},{x: -257.2, y:192.9, width: 2, height: 1}];
 
 var walls = [];
 
@@ -18,6 +18,9 @@ var queue= [];
 
 //Determinar coordenadas de victoria
 //var win = {x:y};
+
+
+//Constructor de badObject
 
 
 	//todas las funciones de animacion!
@@ -78,10 +81,13 @@ function moveamount(x, y){
   position.x = position.x + x
   position.y = position.y + y
 $('#background').css('background-position',position.x + 'px '+position.y+'px');
+
 }
 
 //ticker. Loop cada 800ms.
  function pressStart(){
+	 
+	 
 	globalState = setInterval(function(){
 	if (queue.length !==0){
 		doMove = queue.shift();
@@ -109,8 +115,19 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 } 
 	}
 	else {
-	//Se acabo del stack.
+	//Se acabo el stack.
 		//win!
+		//Checar badPlaces var badPlaces = [{x: 1, y: 2, width: 3, height: 4},{x: 4, y:32, width: 2, height: 1}];
+		console.log(position.x, position.y ) ;
+		for(i=0; i<badPlaces.length; i++)
+		{
+			if(position.x= badPlaces[i].x)
+				if(position.y= badPlaces[i].y)
+					console.log("Valió Queque");
+			
+		}
+		
+		
 		actions.stop();
 		console.log("Stack empty");
 		clearInterval(globalState);
