@@ -94,41 +94,40 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 		console.log(doMove);
 		// Game over, sprite change, items, etc.
 		switch(doMove) {
-    case "N":
-		actions.move_up();
-        moveamount(0,64.3);
-        break;
-    case "S":
-		actions.move_down();
-        moveamount(0,-64.3);
-        break;
-	case "E":
-		actions.move_right();
-        moveamount(-64.3,0);
-        break;
-	case "O":
-		actions.move_left();
-        moveamount(64.3,0);
-        break;
-    default:
-        console.log("Bad Arg") ;
-} 
-	}
-	else {
-	//Se acabo el stack.
-		//win!
-		//Checar badPlaces var badPlaces = [{x: 1, y: 2, width: 3, height: 4},{x: 4, y:32, width: 2, height: 1}];
-		console.log(position.x, position.y ) ;
-		for(i=0; i<badPlaces.length; i++)
-		{
-			if(position.x= badPlaces[i].x)
-				if(position.y= badPlaces[i].y)
+			case "N":
+				actions.move_up();
+				moveamount(0,64.3);
+				break;
+			case "S":
+				actions.move_down();
+				moveamount(0,-64.3);
+				break;
+			case "E":
+				actions.move_right();
+				moveamount(-64.3,0);
+				break;
+			case "O":
+				actions.move_left();
+				moveamount(64.3,0);
+				break;
+			default:
+				console.log("Bad Arg") ;
+			}
+		
+			//Checar badPlaces var badPlaces = [{x: 1, y: 2, width: 3, height: 4},{x: 4, y:32, width: 2, height: 1}];
+			console.log(position.x, position.y ) ;
+		for(i=0; i<badPlaces.length; i++){
+			if(position.x == badPlaces[i].x){
+				if(position.y == badPlaces[i].y){
 					console.log("Valió Queque");
-			
-		}
-		
-		
-		actions.stop();
+					queue = [];
+				}
+			}
+		}				
+	} else {
+		//Se acabo el stack.
+		//win!
+				actions.stop();
 		console.log("Stack empty");
 		clearInterval(globalState);
 		//Results
