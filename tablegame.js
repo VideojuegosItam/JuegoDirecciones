@@ -86,6 +86,7 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 
 //ticker. Loop cada 800ms.
  function pressStart(){
+	document.getElementById('menu').play();
 	 
 	 
 	globalState = setInterval(function(){
@@ -127,10 +128,12 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 	} else {
 		//Se acabo el stack.
 		//win!
-				actions.stop();
+		actions.stop();
 		console.log("Stack empty");
+		document.getElementById('menu').pause();
 		clearInterval(globalState);
 		//Results
 	}
 	}, 800);
+	
 }
