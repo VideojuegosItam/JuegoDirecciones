@@ -14,6 +14,8 @@ var globalState;
   x:0 , y:0
 }
 
+var SqUnit = 64.3; //Tamaño del cuadro, para avanzar justo esa distancia.
+
 var queue= [];
 
 //Determinar coordenadas de victoria
@@ -90,19 +92,19 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 		switch(doMove) {
     case "N":
 		actions.move_up();
-        moveamount(0,64.3);
+        moveamount(0,SqUnit);
         break;
     case "S":
 		actions.move_down();
-        moveamount(0,-64.3);
+        moveamount(0,-1*SqUnit);
         break;
 	case "E":
 		actions.move_right();
-        moveamount(-64.3,0);
+        moveamount(-1*SqUnit,0);
         break;
 	case "O":
 		actions.move_left();
-        moveamount(64.3,0);
+        moveamount(SqUnit,0);
         break;
     default:
         console.log("Bad Arg") ;
