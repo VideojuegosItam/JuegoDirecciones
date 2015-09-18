@@ -4,7 +4,8 @@ console.log("Hi"); //Inicio, solo debug
 //Variables a usar
 var queue= [];
 
-var badPlaces = [{x: 64.3, y: 128.6, width: 3, height: 4},{x: -257.2, y:192.9, width: 2, height: 1}];
+//Arreglo con 'objetos' con posicion en x, y, ancho, alto y estado: 1 si es objeto bueno de victoria, 2 si es objeto malo de game over, 3 si es pared
+var places = [{x: 64.3, y: 128.6, width: 3, height: 4, state:3},{x: -257.2, y:192.9, width: 2, height: 1, state:2}];
 
 var walls = [];
 
@@ -84,6 +85,48 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 
 }
 
+//Funcion que verifica colisiones imprime si es buena colision, mala o pared(regresa true si es buena la colision, false si es mala)
+//La colision con pared es solamente considerada al final qe termina de caminar ash, no se esta verificando si se encuentra una pared durante su camino
+function verifyCol()
+{   for(i=0; i<places.length; i++)
+		{
+			if(position.x == places[i].x)
+			{
+				if(position.y == places[i].y)
+				{
+				    //Colision con pared
+				    if(places[i].state==3)
+				    {
+				        console.log("Pared!");
+				    }
+				        else
+				        {
+				            //Colision de victoria
+				            if(places[i].state==1)
+				            {
+				                console.log("VICTORIA!");
+				                queue = [];
+				                //return true;
+				            }
+				            else
+				            {
+				                //Collision de game over
+				                if(places[i].state==2)
+				                {
+				                console.log("Valió Queque");
+					            queue = [];
+					            //return false;
+				                }
+				            }
+				            
+				        }
+				     
+				    				   				   				    
+				}
+			}
+		}		
+}
+
 //ticker. Loop cada 800ms.
  function pressStart(){
 	document.getElementById('menu').play();
@@ -114,24 +157,18 @@ $('#background').css('background-position',position.x + 'px '+position.y+'px');
 			default:
 				console.log("Bad Arg") ;
 			}
-		
-			//Checar badPlaces var badPlaces = [{x: 1, y: 2, width: 3, height: 4},{x: 4, y:32, width: 2, height: 1}];
-			console.log(position.x, position.y ) ;
-		for(i=0; i<badPlaces.length; i++){
-			if(position.x == badPlaces[i].x){
-				if(position.y == badPlaces[i].y){
-					console.log("Valió Queque");
-					queue = [];
-				}
-			}
-		}				
-	} else {
+			
+			
+	} 
+		else {
 		//Se acabo el stack.
 		//win!
+		verifyCol();
 		actions.stop();
 		console.log("Stack empty");
 		document.getElementById('menu').pause();
 		clearInterval(globalState);
+		
 		//Results
 	}
 	}, 800);
