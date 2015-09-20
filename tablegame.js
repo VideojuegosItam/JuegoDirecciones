@@ -5,7 +5,7 @@ console.log("Hi"); //Inicio, solo debug
 var queue= [];
 
 //Arreglo con 'objetos' con posicion en x, y, ancho, alto y estado: 1 si es objeto bueno de victoria, 2 si es objeto malo de game over, 3 si es pared
-var places = [{x: 64.3, y: 128.6, width: 3, height: 4, state:3},{x: -257.2, y:192.9, width: 2, height: 1, state:2}];
+var places = [{x: 3, y: 2, state:3},{x: -2, y: 3, state:2},{x: -2, y: -2, state:2}];
 
 var walls = [];
 
@@ -19,13 +19,16 @@ var SqUnit = 64.3; //Tamaño del cuadro, para avanzar justo esa distancia.
 
 var queue= [];
 
+var col;
+
 //Determinar coordenadas de victoria
 //var win = {x:y};
 
+function printPos(){
+	console.log(position);
+}
 
 //Constructor de badObject
-
-
 	//todas las funciones de animacion!
 	(function($) {
 		$(document).ready(function() {
@@ -81,116 +84,89 @@ function bBack(){
 
 //mover el background
 function moveamount(x, y){
-  position.x = position.x + x
-  position.y = position.y + y
-$('#background').css('background-position',position.x + 'px '+position.y+'px');
+  position.x = position.x - x;
+  position.y = position.y + y;
+$('#background').css('background-position',-position.x*SqUnit + 'px '+position.y*SqUnit + 'px');
 
 }
 
-//Funcion que verifica colisiones imprime si es buena colision, mala o pared(regresa true si es buena la colision, false si es mala)
-//La colision con pared es solamente considerada al final qe termina de caminar ash, no se esta verificando si se encuentra una pared durante su camino
-function verifyCol()
-{   for(i=0; i<places.length; i++)
+//Funcion que verifica colisiones imprime si es buena colision, mala o pared(regresa true si es buena la colision, fado te si es mala)
+function verifyCol(x,y)
+{   for(var i=0; i<places.length-1; i++)
+	{
+		if(position.x+x == places[i].x && position.y+y ==places[i].y )
 		{
-			if(position.x == places[i].x)
-			{
-				if(position.y == places[i].y)
-				{
-				    //Colision con pared
-				    if(places[i].state==3)
-				    {
-				        console.log("Pared!");
-				    }
-				        else
-				        {
-				            //Colision de victoria
-				            if(places[i].state==1)
-				            {
-				                console.log("VICTORIA!");
-				                queue = [];
-				                //return true;
-				            }
-				            else
-				            {
-				                //Collision de game over
-				                if(places[i].state==2)
-				                {
-				                console.log("Valió Queque");
-					            queue = [];
-					            //return false;
-				                }
-				            }
-				            
-				        }
-				     
-				    				   				   				    
-				}
-			}
-		}		
+		//Colision con algo
+		col=places[i].state;
+			switch(col) {
+				case 3:
+					console.log("PARED");
+					return 3;
+					break;
+				case 2:
+					console.log("Muerte");
+					queue=[];
+					return 2;
+					break;
+				case 1:
+					console.log("Victoria!");
+					queue=[];
+					return 1;
+					break;
+				default:
+					console.log("The F?") ;
+					queue=[];
+					return 4;
+			} 
+		}
+	
+		else
+		{
+		}	
+	}		
 }
-
 //ticker. Loop cada 800ms.
  function pressStart(){
 	document.getElementById('menu').play();
-	 
 	 
 	globalState = setInterval(function(){
 	if (queue.length !==0){
 		doMove = queue.shift();
 		console.log(doMove);
-		// Game over, sprite change, items, etc.
 		switch(doMove) {
-<<<<<<< HEAD
-    case "N":
-		actions.move_up();
-        moveamount(0,SqUnit);
-        break;
-    case "S":
-		actions.move_down();
-        moveamount(0,-1*SqUnit);
-        break;
-	case "E":
-		actions.move_right();
-        moveamount(-1*SqUnit,0);
-        break;
-	case "O":
-		actions.move_left();
-        moveamount(SqUnit,0);
-        break;
-    default:
-        console.log("Bad Arg") ;
-} 
-	}
-	else {
-	//Se acabo del stack.
-=======
-			case "N":
-				actions.move_up();
-				moveamount(0,64.3);
-				break;
-			case "S":
-				actions.move_down();
-				moveamount(0,-64.3);
-				break;
-			case "E":
-				actions.move_right();
-				moveamount(-64.3,0);
-				break;
-			case "O":
-				actions.move_left();
-				moveamount(64.3,0);
-				break;
-			default:
-				console.log("Bad Arg") ;
+		case "N":
+			actions.move_up();
+			if((verifyCol(0,1))!=3){
+				moveamount(0,1);
 			}
-			
-			
-	} 
+			break;
+		case "S":
+			actions.move_down();
+			if((verifyCol(0,-1))!=3){
+				moveamount(0,-1);
+			}
+			break;
+		case "E":
+			actions.move_right();
+			if((verifyCol(1,0))!=3){
+				moveamount(-1,0);
+			}
+			break;
+		case "O":
+			actions.move_left();
+			if((verifyCol(-1,0))!=3){
+				moveamount(1,0);
+			}
+			break;
+		default:
+			console.log("Bad Arg") ;
+		} 
+	}
+
 		else {
 		//Se acabo el stack.
->>>>>>> origin/master
+		//origin/master
 		//win!
-		verifyCol();
 		actions.stop();
 		console.log("Stack empty");
 		document.getElementById('menu').pause();
