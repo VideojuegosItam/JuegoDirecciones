@@ -2,8 +2,8 @@
 	background: transparent url(RubySprite.png) 0 0 no-repeat;
 	position: absolute;
 	display : block;
-	left : 48vw;
-	top: 54vh;
+	left : 50%;
+	top: 53%;
 	width: 32px;
 	height: 41px;
 	z-index: 2000;
@@ -14,4 +14,16 @@
   background: #aedfe5 url(grid.jpg) 0 0 repeat;
   background-position : 0 0;
   transition-duration : 1s
+}
+
+#buttons{
+	text-align:center;
+	line-height: 150%;
+	padding: 4px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background-color: gray;
+    position : fixed;
+    bottom : 5px;
+    right : 10px;
 }

@@ -127,7 +127,7 @@ function verifyCol(x,y)
 }
 //ticker. Loop cada 800ms.
  function pressStart(){
-	document.getElementById('menu').play();
+	document.getElementById('walk').play();
 	 
 	globalState = setInterval(function(){
 	if (queue.length !==0){
@@ -168,8 +168,9 @@ function verifyCol(x,y)
 		//origin/master
 		//win!
 		actions.stop();
+		document.getElementById('walk').pause();
+		document.getElementById('walk').currentTime = 0;
 		console.log("Stack empty");
-		document.getElementById('menu').pause();
 		clearInterval(globalState);
 		
 		//Results
