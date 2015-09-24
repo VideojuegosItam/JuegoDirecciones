@@ -1,19 +1,20 @@
 #Sprite{
-	background: transparent url(RubySprite.png) 0 0 no-repeat;
+	background: transparent url(SpritePame.png) 0 0 no-repeat;
 	position: absolute;
 	display : block;
 	left : 50%;
 	top: 53%;
-	width: 32px;
-	height: 41px;
+	width: 128px;
+	height: 128px;
 	z-index: 2000;
 	cursor: pointer;
 }
 
 #background {
-  background: #aedfe5 url(grid.jpg) 0 0 repeat;
+  background: #aedfe5 url(mapa2.png) 0 0 no-repeat;
   background-position : 0 0;
-  transition-duration : 1s
+  transition-duration : 1s;
+   background-size: 1000px
 }
 
 #buttons{

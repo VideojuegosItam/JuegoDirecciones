@@ -15,7 +15,7 @@ var globalState;
   x:0 , y:0
 }
 
-var SqUnit = 64.3; //Tamaño del cuadro, para avanzar justo esa distancia.
+var SqUnit = 59; //Tamaño del cuadro, para avanzar justo esa distancia.
 
 var queue= [];
 
