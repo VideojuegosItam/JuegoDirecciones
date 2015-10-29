@@ -7,12 +7,12 @@
 		<!-- <script src="Librerias/jquery.spritely.js" type="text/javascript"></script> -->
 		<script src="tablegame.js"></script>
 	</head>
-	<body id="fondo">
-	<audio id="menu" src="menu.mp3" preload="auto" ></audio>
-	<audio id="walk" src="walking.mp3" preload="auto" ></audio>
-	<audio id="bump" src="bump.mp3" preload="auto" ></audio>
-	<div id="map">
-	
+	<body id="map">
+		<audio id="menu" src="menu.mp3" preload="auto" ></audio>
+		<audio id="walk" src="walking.mp3" preload="auto" ></audio>
+		<audio id="bump" src="bump.mp3" preload="auto" ></audio>	
+			<div id="Sprite"></div>
+
 		<div id="Buttons">
 			 <button type="button" onclick="addQueue('N')">Norte</button> 
 			 <button type="button" onclick="addQueue('S')">Sur</button> 
@@ -23,6 +23,5 @@
 			 <button type="button" onclick="pressStart()">GO!</button> 
 			 <button type="button" onclick="printPos()">POS</button> 
 		</div>
-		<div id="Sprite"></div>
 	</body>
 </html>

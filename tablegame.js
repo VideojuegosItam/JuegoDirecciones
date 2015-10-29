@@ -5,7 +5,23 @@ console.log("Hi"); //Inicio, solo debug
 var queue= [];
 
 //Arreglo con 'objetos' con posicion en x, y, ancho, alto y estado: 1 si es objeto bueno de victoria, 2 si es objeto malo de game over, 3 si es pared
-var places = [{x: 3, y: 2, state:3},{x: -2, y: 3, state:2},{x: -2, y: -2, state:2}];
+var places = [{x: 1, y: 0, state:3},{x: -1, y: 1, state:3},{x: 1, y: 1, state:3},{x: 4, y: 0, state:3},{x: 3, y: 2, state:3},{x: 3, y: -1, state:3},{x: 3, y: -2, state:3},
+{x: 3, y: 2, state:3},{x: 4, y: 2, state:3},{x: 3, y: 3, state:3},{x: 4, y: 3, state:3},{x: 6, y: 0, state:3},
+{x: 6, y: 1, state:3},{x: 6, y: 3, state:3},{x: 7, y: 3, state:3},{x: 7, y: 4, state:3},
+{x: 8, y: 4, state:3},{x: 9, y: 4, state:3},{x: 9, y: 5, state:3},{x: 1, y: 4, state:3},
+{x: 2, y: -1, state:3},{x: 3, y: -1, state:3},{x: 4, y: -1, state:3},{x: 5, y: -1, state:3},
+{x: 6, y: -1, state:3},{x: 1, y: -2, state:3},{x: 0, y: -3, state:3},{x: -2, y: -3, state:3},];
+
+//Auto Llenar las paredes
+for(var i=-3;i<=15;i++){
+	places.push({x: i, y: 6, state:3});
+	places.push({x: i, y: -9, state:3});
+	}
+for(var i=-9;i<=6;i++){
+	places.push({x: -3, y: i, state:3});
+	places.push({x: 15, y: i, state:3});
+	}
+
 
 var walls = [];
 
@@ -15,7 +31,7 @@ var globalState;
   x:0 , y:0
 }
 
-var SqUnit = 59; //Tamaño del cuadro, para avanzar justo esa distancia.
+var SqUnit = 44; //Tamaño del cuadro, para avanzar justo esa distancia.
 
 var queue= [];
 
@@ -82,17 +98,18 @@ function bBack(){
 	console.log(queue);
 }
 
-//mover el background
+//mover el Sprite
 function moveamount(x, y){
-  position.x = position.x - x;
+  position.x = position.x + x;
   position.y = position.y + y;
-$('#background').css('background-position',-position.x*SqUnit + 'px '+position.y*SqUnit + 'px');
+$('#Sprite').css('left',(position.x*SqUnit +35) + 'px');
+$('#Sprite').css('top',(-position.y*SqUnit +170) + 'px');
 
 }
 
 //Funcion que verifica colisiones imprime si es buena colision, mala o pared(regresa true si es buena la colision, fado te si es mala)
 function verifyCol(x,y)
-{   for(var i=0; i<places.length-1; i++)
+{   for(var i=0; i<places.length; i++)
 	{
 		if(position.x+x == places[i].x && position.y+y ==places[i].y )
 		{
@@ -127,7 +144,7 @@ function verifyCol(x,y)
 }
 //ticker. Loop cada 800ms.
  function pressStart(){
-	document.getElementById('walk').play();
+	//document.getElementById('walk').play();
 	 
 	globalState = setInterval(function(){
 	if (queue.length !==0){
@@ -149,13 +166,13 @@ function verifyCol(x,y)
 		case "E":
 			actions.move_right();
 			if((verifyCol(1,0))!=3){
-				moveamount(-1,0);
+				moveamount(1,0);
 			}
 			break;
 		case "O":
 			actions.move_left();
 			if((verifyCol(-1,0))!=3){
-				moveamount(1,0);
+				moveamount(-1,0);
 			}
 			break;
 		default:
@@ -171,6 +188,7 @@ function verifyCol(x,y)
 		document.getElementById('walk').pause();
 		document.getElementById('walk').currentTime = 0;
 		console.log("Stack empty");
+		console.log(position);
 		clearInterval(globalState);
 		
 		//Results
